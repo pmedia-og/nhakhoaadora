@@ -1,6 +1,6 @@
 
 (function(){
-  const KEY = "adora_demo_v1";
+  const KEY = "adora_demo_v2";
   const DEFAULTS = {
     settings:{
       brand:"Nha Khoa Adora",
@@ -10,24 +10,26 @@
       address:"236 Đồng Khởi, P. Tam Hiệp, Đồng Nai",
       hours:"08:00 – 20:00 · Thứ 2 – Chủ nhật",
       website:"https://nhakhoaadora.com/",
+      logo:"https://nhakhoaadora.com/wp-content/uploads/2025/08/ICON-TAG-WEB-02.png",
       zalo:"https://zalo.me/0968096868",
       map:"https://www.google.com/maps/search/?api=1&query=236+Dong+Khoi+Tam+Hiep+Dong+Nai"
     },
     services:[
-      {id:"sv1",name:"Niềng răng thẩm mỹ",icon:"🦷",category:"Chỉnh nha",price:"Từ 25.000.000đ",desc:"Giải pháp chỉnh nha cá nhân hóa, theo dõi định kỳ cùng bác sĩ chuyên khoa.",active:true},
-      {id:"sv2",name:"Cấy ghép Implant",icon:"⚙️",category:"Phục hình",price:"Liên hệ tư vấn",desc:"Phục hồi răng mất với kế hoạch điều trị và đánh giá tình trạng xương hàm.",active:true},
-      {id:"sv3",name:"Răng sứ thẩm mỹ",icon:"✨",category:"Thẩm mỹ",price:"Từ 3.500.000đ/răng",desc:"Phục hình thẩm mỹ với kế hoạch thiết kế nụ cười phù hợp khuôn mặt.",active:true},
-      {id:"sv4",name:"Tẩy trắng răng",icon:"💎",category:"Thẩm mỹ",price:"Từ 1.500.000đ",desc:"Cải thiện màu răng và tư vấn chăm sóc duy trì sau điều trị.",active:true},
-      {id:"sv5",name:"Nha khoa trẻ em",icon:"🌈",category:"Tổng quát",price:"Từ 200.000đ",desc:"Khám, phòng ngừa và chăm sóc răng miệng cho trẻ trong môi trường thân thiện.",active:true},
-      {id:"sv6",name:"Khám & vệ sinh răng",icon:"🪥",category:"Tổng quát",price:"Từ 200.000đ",desc:"Khám tổng quát, tư vấn và vệ sinh răng miệng định kỳ.",active:true}
+      {id:"sv1",name:"Niềng răng thẩm mỹ",icon:"🦷",image:"https://nhakhoaadora.com/wp-content/uploads/2025/09/z7001284779872_5b8e6f0f694585194c130dc2001dfda9.jpg",category:"Chỉnh nha",price:"Từ 22.000.000đ",desc:"Giải pháp chỉnh nha cá nhân hóa, theo dõi định kỳ cùng bác sĩ chuyên khoa.",active:true},
+      {id:"sv2",name:"Cấy ghép Implant",icon:"⚙️",image:"https://nhakhoaadora.com/wp-content/uploads/2025/08/TRONG-RANG-IMPLANT-scaled.jpg",category:"Phục hình",price:"Liên hệ tư vấn",desc:"Phục hồi răng mất với kế hoạch điều trị và đánh giá tình trạng xương hàm.",active:true},
+      {id:"sv3",name:"Răng sứ thẩm mỹ",icon:"✨",image:"https://nhakhoaadora.com/wp-content/uploads/2025/09/c2cd6d3e4438f666af294.jpg20250503160616.webp",category:"Thẩm mỹ",price:"Từ 3.500.000đ/răng",desc:"Phục hình thẩm mỹ với kế hoạch thiết kế nụ cười phù hợp khuôn mặt.",active:true},
+      {id:"sv4",name:"Tẩy trắng răng",icon:"💎",image:"https://nhakhoaadora.com/wp-content/uploads/2025/09/tay-trang-rang-gia-bao-nhieu-1024x683-1.jpg",category:"Thẩm mỹ",price:"Xem bảng giá",desc:"Cải thiện màu răng và tư vấn chăm sóc duy trì sau điều trị.",active:true},
+      {id:"sv5",name:"Nha khoa trẻ em",icon:"🌈",image:"https://nhakhoaadora.com/wp-content/uploads/2025/09/NHA-KHOA-TRE-EM-1-scaled.png",category:"Tổng quát",price:"Liên hệ tư vấn",desc:"Khám, phòng ngừa và chăm sóc răng miệng cho trẻ trong môi trường thân thiện.",active:true},
+      {id:"sv6",name:"Khám & vệ sinh răng",icon:"🪥",image:"https://nhakhoaadora.com/wp-content/uploads/2025/09/NHA-KHOA-TONG-QUAT-1-scaled.png",category:"Tổng quát",price:"Từ 250.000đ",desc:"Khám tổng quát, tư vấn và vệ sinh răng miệng định kỳ.",active:true}
     ],
     doctors:[
-      {id:"dr1",name:"BS. Võ Hàm Thắng",title:"Bác sĩ chuyên khoa",focus:"Nha khoa tổng quát & phục hình",active:true},
-      {id:"dr2",name:"BS. Trần Thị Kim Liên",title:"Bác sĩ chuyên khoa",focus:"Chỉnh nha & nha khoa thẩm mỹ",active:true},
-      {id:"dr3",name:"ThS.BS.CKII Nguyễn Thị Minh Hiền",title:"Thạc sĩ, Bác sĩ CKII",focus:"Điều trị chuyên sâu",active:true},
-      {id:"dr4",name:"BS. Nguyễn Thị Tuyết Nhung",title:"Bác sĩ chuyên khoa",focus:"Nha khoa tổng quát",active:true},
-      {id:"dr5",name:"BS.CKI Nguyễn Phương Hanh",title:"Bác sĩ CKI",focus:"Phục hình & thẩm mỹ",active:true},
-      {id:"dr6",name:"BS. Lê Quang Tấn Đạt",title:"Bác sĩ chuyên khoa",focus:"Nha khoa tổng quát",active:true}
+      {id:"dr1",name:"ThS.BS.CKII Nguyễn Thị Minh Hiền",title:"Thạc sĩ, Bác sĩ CKII",focus:"Điều trị chuyên sâu",image:"https://nhakhoaadora.com/wp-content/uploads/2025/08/HINH-BAC-HIEN-NEW-2025_web-01-1-scaled.png",active:true},
+      {id:"dr2",name:"BS. Trần Thị Kim Liên",title:"Bác sĩ chuyên khoa",focus:"Nha khoa tổng quát & chỉnh nha",image:"https://nhakhoaadora.com/wp-content/uploads/2025/08/BSY-TRAN-THI-KIM-LIEN-scaled.png",active:true},
+      {id:"dr3",name:"BS.CKI Nguyễn Phương Hanh",title:"Bác sĩ CKI",focus:"Nha khoa tổng quát & thẩm mỹ",image:"https://nhakhoaadora.com/wp-content/uploads/2025/08/BAC-SI-PHUONG-HANH-trang-chu-01.png",active:true},
+      {id:"dr4",name:"BS.CKI Vũ Tuân",title:"Bác sĩ CKI",focus:"Nha khoa chuyên sâu",image:"https://nhakhoaadora.com/wp-content/uploads/2025/08/BSY-VU-TUAN-scaled.png",active:true},
+      {id:"dr5",name:"BS.CKI Võ Hàm Thắng",title:"Bác sĩ CKI",focus:"Tổng quát, phẫu thuật miệng & Implant",image:"https://nhakhoaadora.com/wp-content/uploads/2025/08/BSY-VO-HAM-THANG-scaled.png",active:true},
+      {id:"dr6",name:"BS. Nguyễn Thị Tuyết Nhung",title:"Bác sĩ chuyên khoa",focus:"Nha khoa tổng quát & chỉnh nha",image:"https://nhakhoaadora.com/wp-content/uploads/2025/08/z7001206525865_05449286bf943bfc9d8d9058d5164ca1.jpg",active:true},
+      {id:"dr7",name:"BS. Trần Thị Diễm Hà",title:"Bác sĩ chuyên khoa",focus:"Nha khoa tổng quát",image:"https://nhakhoaadora.com/wp-content/uploads/2025/08/BSY-TRAN-THI-DIEM-HA-scaled.png",active:true}
     ],
     news:[
       {id:"nw1",title:"5 dấu hiệu bạn nên đi khám răng sớm",tag:"Kiến thức",excerpt:"Đau buốt, chảy máu nướu hay hơi thở có mùi kéo dài đều là những tín hiệu không nên bỏ qua.",active:true},

@@ -10,7 +10,7 @@
 <div class="admin-shell">
   <aside class="admin-sidebar">
     <div class="brand">
-      <div class="brand-mark">A</div>
+      <div class="brand-mark brand-logo-wrap"><img id="adminLogo" src="https://nhakhoaadora.com/wp-content/uploads/2025/08/ICON-TAG-WEB-02.png" alt="Adora"></div>
       <div><strong>ADORA</strong><small>Admin Portal</small></div>
     </div>
     <nav class="admin-nav" id="adminNav">
@@ -111,6 +111,7 @@
             <div class="field span-2"><label>Địa chỉ</label><input name="address"></div>
             <div class="field"><label>Giờ làm việc</label><input name="hours"></div>
             <div class="field"><label>Website</label><input name="website"></div>
+            <div class="field"><label>Logo URL</label><input name="logo"></div>
             <div class="field"><label>Zalo URL</label><input name="zalo"></div>
             <div class="field"><label>Google Maps URL</label><input name="map"></div>
             <div class="span-2"><button class="btn btn-primary" type="submit">Lưu cấu hình</button></div>
@@ -229,7 +230,7 @@ document.getElementById("addAppointment").onclick=()=>modal("Thêm lịch hẹn"
 
 function renderServices(data){
   document.getElementById("serviceGrid").innerHTML=data.services.map(s=>`<div class="card entity-card">
-    <div class="entity-top"><div class="entity-avatar">${A.esc(s.icon)}</div><span class="badge">${s.active?"Đang hiển thị":"Đang ẩn"}</span></div>
+    <div class="entity-top"><div class="entity-avatar">${s.image?`<img src="${A.esc(s.image)}" alt="${A.esc(s.name)}" onerror="this.remove()">`:A.esc(s.icon)}</div><span class="badge">${s.active?"Đang hiển thị":"Đang ẩn"}</span></div>
     <div><h4>${A.esc(s.name)}</h4><p>${A.esc(s.desc)}</p></div>
     <div class="entity-meta"><span class="badge">${A.esc(s.category)}</span><span class="badge">${A.esc(s.price)}</span></div>
     <div class="table-actions"><button class="btn btn-sm btn-outline" onclick="editService('${s.id}')">Sửa</button><button class="btn btn-sm btn-outline" onclick="toggleEntity('services','${s.id}')">${s.active?"Ẩn":"Hiện"}</button></div>
@@ -241,15 +242,16 @@ function serviceForm(s={}){
     <div class="field"><label>Biểu tượng</label><input id="sIcon" value="${A.esc(s.icon||"🦷")}"></div>
     <div class="field"><label>Nhóm</label><input id="sCategory" value="${A.esc(s.category||"Tổng quát")}"></div>
     <div class="field"><label>Chi phí tham khảo</label><input id="sPrice" value="${A.esc(s.price||"Liên hệ tư vấn")}"></div>
+    <div class="field span-2"><label>Ảnh dịch vụ (URL)</label><input id="sImage" value="${A.esc(s.image||"")}" placeholder="https://..."></div>
     <div class="field span-2"><label>Mô tả</label><textarea id="sDesc">${A.esc(s.desc||"")}</textarea></div>
   </div>`;
 }
-window.editService=function(id){const d=A.getData(),s=d.services.find(x=>x.id===id);modal("Sửa dịch vụ",serviceForm(s),()=>{const data=A.getData(),x=data.services.find(z=>z.id===id);Object.assign(x,{name:sName.value.trim(),icon:sIcon.value.trim()||"🦷",category:sCategory.value.trim(),price:sPrice.value.trim(),desc:sDesc.value.trim()});if(!x.name)return false;A.setData(data);A.toast("Đã cập nhật dịch vụ");renderAll()})};
-document.getElementById("addService").onclick=()=>modal("Thêm dịch vụ",serviceForm(),()=>{const d=A.getData();if(!sName.value.trim())return false;d.services.push({id:A.uid("sv"),name:sName.value.trim(),icon:sIcon.value.trim()||"🦷",category:sCategory.value.trim(),price:sPrice.value.trim(),desc:sDesc.value.trim(),active:true});A.setData(d);A.toast("Đã thêm dịch vụ");renderAll()});
+window.editService=function(id){const d=A.getData(),s=d.services.find(x=>x.id===id);modal("Sửa dịch vụ",serviceForm(s),()=>{const data=A.getData(),x=data.services.find(z=>z.id===id);Object.assign(x,{name:sName.value.trim(),icon:sIcon.value.trim()||"🦷",category:sCategory.value.trim(),price:sPrice.value.trim(),image:sImage.value.trim(),desc:sDesc.value.trim()});if(!x.name)return false;A.setData(data);A.toast("Đã cập nhật dịch vụ");renderAll()})};
+document.getElementById("addService").onclick=()=>modal("Thêm dịch vụ",serviceForm(),()=>{const d=A.getData();if(!sName.value.trim())return false;d.services.push({id:A.uid("sv"),name:sName.value.trim(),icon:sIcon.value.trim()||"🦷",category:sCategory.value.trim(),price:sPrice.value.trim(),image:sImage.value.trim(),desc:sDesc.value.trim(),active:true});A.setData(d);A.toast("Đã thêm dịch vụ");renderAll()});
 
 function renderDoctors(data){
   document.getElementById("doctorGrid").innerHTML=data.doctors.map(d=>`<div class="card entity-card">
-    <div class="entity-top"><div class="entity-avatar">${A.esc(d.name.split(" ").slice(-1)[0].slice(0,1))}</div><span class="badge">${d.active?"Đang hiển thị":"Đang ẩn"}</span></div>
+    <div class="entity-top"><div class="entity-avatar">${d.image?`<img src="${A.esc(d.image)}" alt="${A.esc(d.name)}" onerror="this.remove()">`:A.esc(d.name.split(" ").slice(-1)[0].slice(0,1))}</div><span class="badge">${d.active?"Đang hiển thị":"Đang ẩn"}</span></div>
     <div><h4>${A.esc(d.name)}</h4><p>${A.esc(d.title)}<br>${A.esc(d.focus)}</p></div>
     <div class="table-actions"><button class="btn btn-sm btn-outline" onclick="editDoctor('${d.id}')">Sửa</button><button class="btn btn-sm btn-outline" onclick="toggleEntity('doctors','${d.id}')">${d.active?"Ẩn":"Hiện"}</button></div>
   </div>`).join("");
@@ -259,10 +261,11 @@ function doctorForm(d={}){
     <div class="field span-2"><label>Họ tên</label><input id="dName" value="${A.esc(d.name||"")}"></div>
     <div class="field"><label>Học vị / chức danh</label><input id="dTitle" value="${A.esc(d.title||"Bác sĩ chuyên khoa")}"></div>
     <div class="field"><label>Chuyên môn</label><input id="dFocus" value="${A.esc(d.focus||"Nha khoa tổng quát")}"></div>
+    <div class="field span-2"><label>Ảnh bác sĩ (URL)</label><input id="dImage" value="${A.esc(d.image||"")}" placeholder="https://..."></div>
   </div>`;
 }
-window.editDoctor=function(id){const d=A.getData(),x=d.doctors.find(z=>z.id===id);modal("Sửa bác sĩ",doctorForm(x),()=>{const data=A.getData(),z=data.doctors.find(y=>y.id===id);Object.assign(z,{name:dName.value.trim(),title:dTitle.value.trim(),focus:dFocus.value.trim()});if(!z.name)return false;A.setData(data);A.toast("Đã cập nhật bác sĩ");renderAll()})};
-document.getElementById("addDoctor").onclick=()=>modal("Thêm bác sĩ",doctorForm(),()=>{const d=A.getData();if(!dName.value.trim())return false;d.doctors.push({id:A.uid("dr"),name:dName.value.trim(),title:dTitle.value.trim(),focus:dFocus.value.trim(),active:true});A.setData(d);A.toast("Đã thêm bác sĩ");renderAll()});
+window.editDoctor=function(id){const d=A.getData(),x=d.doctors.find(z=>z.id===id);modal("Sửa bác sĩ",doctorForm(x),()=>{const data=A.getData(),z=data.doctors.find(y=>y.id===id);Object.assign(z,{name:dName.value.trim(),title:dTitle.value.trim(),focus:dFocus.value.trim(),image:dImage.value.trim()});if(!z.name)return false;A.setData(data);A.toast("Đã cập nhật bác sĩ");renderAll()})};
+document.getElementById("addDoctor").onclick=()=>modal("Thêm bác sĩ",doctorForm(),()=>{const d=A.getData();if(!dName.value.trim())return false;d.doctors.push({id:A.uid("dr"),name:dName.value.trim(),title:dTitle.value.trim(),focus:dFocus.value.trim(),image:dImage.value.trim(),active:true});A.setData(d);A.toast("Đã thêm bác sĩ");renderAll()});
 
 function renderNews(data){
   document.getElementById("newsGrid").innerHTML=data.news.map(n=>`<div class="card entity-card">
@@ -285,6 +288,7 @@ document.getElementById("addNews").onclick=()=>modal("Thêm bài viết",newsFor
 window.toggleEntity=function(type,id){const d=A.getData(),x=d[type].find(z=>z.id===id);if(x){x.active=!x.active;A.setData(d);renderAll()}};
 
 function renderSettings(data){
+  if(window.adminLogo && data.settings.logo) adminLogo.src=data.settings.logo;
   const f=document.getElementById("settingsForm");
   Object.entries(data.settings).forEach(([k,v])=>{if(f.elements[k])f.elements[k].value=v||""});
 }

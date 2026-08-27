@@ -271,3 +271,30 @@ linear-gradient(-25deg,#DFEEDC 0 46%,#D6E7F5 47% 54%,#F4E6D0 55%);background-siz
  .mini-nav{position:fixed}
  .launcher h1{font-size:36px}
 }
+
+/* Adora official media integration */
+.brand-logo-wrap{
+  width:82px!important;height:38px!important;border-radius:0!important;
+  background:transparent!important;padding:0!important;overflow:hidden;flex:0 0 82px;
+}
+.brand-logo-wrap img{width:100%;height:100%;object-fit:contain;display:block}
+.service-art{overflow:hidden}
+.service-art img{width:100%;height:100%;object-fit:cover;display:block}
+.doctor-avatar{overflow:hidden;background:#fff}
+.doctor-avatar img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block}
+.entity-avatar{overflow:hidden}
+.entity-avatar img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block}
+.hero-real-image{position:absolute;right:0;top:0;width:50%;height:100%;object-fit:cover;object-position:center;z-index:0}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,249,245,1) 0%,rgba(255,249,245,.98) 42%,rgba(255,249,245,.62) 62%,rgba(255,249,245,.06) 100%);z-index:1}
+.hero:after{z-index:1}
+.hero-copy{z-index:2;max-width:72%}
+.service-detail-icon{overflow:hidden;padding:0}
+.service-detail-icon img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:470px){
+  .mini-header .brand-logo-wrap{width:70px!important;flex-basis:70px;height:32px!important}
+  .mini-header .brand strong{font-size:12px}
+  .mini-header .brand small{font-size:9px}
+  .hero-real-image{width:56%;opacity:.9}
+  .hero:before{background:linear-gradient(90deg,rgba(255,249,245,1) 0%,rgba(255,249,245,.96) 48%,rgba(255,249,245,.52) 72%,rgba(255,249,245,.12) 100%)}
+  .hero-copy{max-width:78%}
+}

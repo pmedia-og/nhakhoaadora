@@ -12,7 +12,7 @@
     <div class="mini-status"><span>11:54</span><span>Zalo Mini App Demo · 5G ◉</span></div>
     <header class="mini-header">
       <div class="brand">
-        <div class="brand-mark">A</div>
+        <div class="brand-mark brand-logo-wrap"><img id="miniLogo" src="https://nhakhoaadora.com/wp-content/uploads/2025/08/ICON-TAG-WEB-02.png" alt="Adora"></div>
         <div><strong id="miniBrand">Nha Khoa Adora</strong><small>Chăm sóc nụ cười cùng bạn</small></div>
       </div>
       <button class="icon-btn" onclick="showView('appointments')">◷</button>
@@ -21,6 +21,7 @@
     <main class="mini-content">
       <section class="mini-view active" id="view-home">
         <div class="hero">
+          <img class="hero-real-image" src="https://nhakhoaadora.com/wp-content/uploads/2025/09/z7001284779872_5b8e6f0f694585194c130dc2001dfda9.jpg" alt="Nha khoa Adora">
           <div class="hero-copy">
             <p class="eyebrow">NHA KHOA ADORA</p>
             <h1 id="heroSlogan">Kiến tạo nụ cười hoàn hảo của bạn</h1>
@@ -49,9 +50,9 @@
         <div class="section">
           <div class="section-title"><h2>Cơ sở vật chất</h2><span class="muted" style="font-size:11px">Hình ảnh công khai</span></div>
           <div class="facility-grid">
-            <div class="facility-img"><div class="fallback">🏥</div><img src="https://cdnvttimg.vttechsolution.com/ImageDocsys/_Library/phong-kham-nha-adora%2820231002111013%29.jpg" alt="Không gian Nha khoa Adora" onerror="this.style.display='none'"></div>
-            <div class="facility-img"><div class="fallback">🩻</div><img src="https://alltop.vn/backend/media/images/posts/1813/Nha_Khoa_Adora_Sai_Gon-295510.jpg" alt="Thiết bị chẩn đoán hình ảnh" onerror="this.style.display='none'"></div>
-            <div class="facility-img"><div class="fallback">🧑‍⚕️</div><img src="https://alltop.vn/backend/media/images/posts/2946/Nha_khoa_Adora_Sai_Gon-233277.png" alt="Tư vấn nha khoa" onerror="this.style.display='none'"></div>
+            <div class="facility-img"><div class="fallback">🏥</div><img src="https://nhakhoaadora.com/wp-content/uploads/2025/09/z7001284779872_5b8e6f0f694585194c130dc2001dfda9.jpg" alt="Không gian Nha khoa Adora" onerror="this.style.display='none'"></div>
+            <div class="facility-img"><div class="fallback">🩻</div><img src="https://nhakhoaadora.com/wp-content/uploads/2025/08/TRONG-RANG-IMPLANT-scaled.jpg" alt="Thiết bị chẩn đoán hình ảnh" onerror="this.style.display='none'"></div>
+            <div class="facility-img"><div class="fallback">🧑‍⚕️</div><img src="https://nhakhoaadora.com/wp-content/uploads/2025/09/IMG_4892-scaled.jpg" alt="Tư vấn nha khoa" onerror="this.style.display='none'"></div>
           </div>
         </div>
 
@@ -131,7 +132,7 @@ window.scrollDoctors=scrollDoctors;
 
 function render(){
   const d=A.getData(),s=d.settings;
-  miniBrand.textContent=s.brand;heroSlogan.textContent=s.slogan;homeAddress.textContent=s.address;
+  miniBrand.textContent=s.brand;miniLogo.src=s.logo||miniLogo.src;heroSlogan.textContent=s.slogan;homeAddress.textContent=s.address;
   callBtn.href="tel:"+s.phone.replace(/\s/g,"");zaloBtn.href=s.zalo;
   contactAddress.textContent=s.address;contactPhone.textContent=s.phone+(s.phone2?" · "+s.phone2:"");contactHours.textContent=s.hours;
   contactCall.href="tel:"+s.phone.replace(/\s/g,"");contactZalo.href=s.zalo;mapLink.href=s.map;
@@ -139,20 +140,20 @@ function render(){
 }
 function renderHome(d){
   const services=d.services.filter(x=>x.active).slice(0,5);
-  homeServices.innerHTML=services.map(s=>`<button class="service-card" onclick="openService('${s.id}')"><div class="service-art">${A.esc(s.icon)}</div><div class="service-body"><h3>${A.esc(s.name)}</h3><p>${A.esc(s.desc)}</p><div class="service-price">${A.esc(s.price)}</div></div></button>`).join("");
-  homeDoctors.innerHTML=d.doctors.filter(x=>x.active).map(doc=>`<div class="doctor-card"><div class="doctor-avatar">${A.esc(doc.name.split(" ").slice(-1)[0].slice(0,1))}</div><h3>${A.esc(doc.name)}</h3><p>${A.esc(doc.title)}<br>${A.esc(doc.focus)}</p></div>`).join("");
+  homeServices.innerHTML=services.map(s=>`<button class="service-card" onclick="openService('${s.id}')"><div class="service-art">${s.image?`<img src="${A.esc(s.image)}" alt="${A.esc(s.name)}" onerror="this.remove()">`:A.esc(s.icon)}</div><div class="service-body"><h3>${A.esc(s.name)}</h3><p>${A.esc(s.desc)}</p><div class="service-price">${A.esc(s.price)}</div></div></button>`).join("");
+  homeDoctors.innerHTML=d.doctors.filter(x=>x.active).map(doc=>`<div class="doctor-card"><div class="doctor-avatar">${doc.image?`<img src="${A.esc(doc.image)}" alt="${A.esc(doc.name)}" onerror="this.remove()">`:A.esc(doc.name.split(" ").slice(-1)[0].slice(0,1))}</div><h3>${A.esc(doc.name)}</h3><p>${A.esc(doc.title)}<br>${A.esc(doc.focus)}</p></div>`).join("");
   homeNews.innerHTML=d.news.filter(x=>x.active).map(n=>`<article class="news-card"><small>${A.esc(n.tag)}</small><h3>${A.esc(n.title)}</h3><p>${A.esc(n.excerpt)}</p></article>`).join("");
 }
 function renderServices(d){
   const cats=["Tất cả",...new Set(d.services.filter(x=>x.active).map(x=>x.category))];
   serviceFilters.innerHTML=cats.map(c=>`<button class="${serviceFilter===c?"active":""}" onclick="setFilter('${A.esc(c)}')">${A.esc(c)}</button>`).join("");
   const list=d.services.filter(x=>x.active&&(serviceFilter==="Tất cả"||x.category===serviceFilter));
-  serviceList.innerHTML=list.map(s=>`<button class="service-row" onclick="openService('${s.id}')"><div class="service-art">${A.esc(s.icon)}</div><div><h3>${A.esc(s.name)}</h3><p>${A.esc(s.desc)}<br><strong style="color:#E9622B">${A.esc(s.price)}</strong></p></div><div class="arrow">›</div></button>`).join("");
+  serviceList.innerHTML=list.map(s=>`<button class="service-row" onclick="openService('${s.id}')"><div class="service-art">${s.image?`<img src="${A.esc(s.image)}" alt="${A.esc(s.name)}" onerror="this.remove()">`:A.esc(s.icon)}</div><div><h3>${A.esc(s.name)}</h3><p>${A.esc(s.desc)}<br><strong style="color:#E9622B">${A.esc(s.price)}</strong></p></div><div class="arrow">›</div></button>`).join("");
 }
 window.setFilter=function(c){serviceFilter=c;renderServices(A.getData())};
 window.openService=function(id){
   const d=A.getData(),s=A.serviceBy(d,id);
-  modal(`<div class="service-detail"><div class="service-detail-icon">${A.esc(s.icon)}</div><p class="eyebrow">${A.esc(s.category)}</p><h2>${A.esc(s.name)}</h2><p>${A.esc(s.desc)}</p><ul><li>Khám và tư vấn tình trạng thực tế.</li><li>Kế hoạch điều trị được cá nhân hóa.</li><li>Chi phí hiển thị chỉ là mức tham khảo trong demo.</li></ul><button class="btn btn-primary" style="width:100%" onclick="bookService('${s.id}')">Đặt lịch dịch vụ này</button></div>`);
+  modal(`<div class="service-detail"><div class="service-detail-icon">${s.image?`<img src="${A.esc(s.image)}" alt="${A.esc(s.name)}" onerror="this.remove()">`:A.esc(s.icon)}</div><p class="eyebrow">${A.esc(s.category)}</p><h2>${A.esc(s.name)}</h2><p>${A.esc(s.desc)}</p><ul><li>Khám và tư vấn tình trạng thực tế.</li><li>Kế hoạch điều trị được cá nhân hóa.</li><li>Chi phí hiển thị chỉ là mức tham khảo trong demo.</li></ul><button class="btn btn-primary" style="width:100%" onclick="bookService('${s.id}')">Đặt lịch dịch vụ này</button></div>`);
 };
 function modal(body){
   modalRoot.innerHTML=`<div class="modal-backdrop" id="mback"><div class="modal"><div class="modal-head"><h3>Thông tin dịch vụ</h3><button class="icon-btn" id="mclose">✕</button></div><div class="modal-body">${body}</div></div></div>`;
