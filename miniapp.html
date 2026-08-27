@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Nha Khoa Adora — Mini App Demo</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="mini-page">
+<div class="phone-stage">
+  <div class="phone">
+    <div class="mini-status"><span>11:54</span><span>Zalo Mini App Demo · 5G ◉</span></div>
+    <header class="mini-header">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div><strong id="miniBrand">Nha Khoa Adora</strong><small>Chăm sóc nụ cười cùng bạn</small></div>
+      </div>
+      <button class="icon-btn" onclick="showView('appointments')">◷</button>
+    </header>
+
+    <main class="mini-content">
+      <section class="mini-view active" id="view-home">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">NHA KHOA ADORA</p>
+            <h1 id="heroSlogan">Kiến tạo nụ cười hoàn hảo của bạn</h1>
+            <p>Khám, tư vấn và đặt lịch thuận tiện ngay trong Zalo.</p>
+            <button class="btn btn-primary" onclick="showView('booking')">Đặt lịch khám →</button>
+            <div class="hero-pills"><span>Đội ngũ chuyên khoa</span><span>Trang thiết bị hiện đại</span><span>Theo dõi sau điều trị</span></div>
+          </div>
+        </div>
+        <div class="quick-grid">
+          <button class="quick" onclick="showView('services')"><span class="quick-icon">🦷</span>Dịch vụ</button>
+          <button class="quick" onclick="scrollDoctors()"><span class="quick-icon">👩‍⚕️</span>Bác sĩ</button>
+          <button class="quick" onclick="showView('appointments')"><span class="quick-icon">📅</span>Lịch hẹn</button>
+          <button class="quick" onclick="showView('contact')"><span class="quick-icon">📍</span>Liên hệ</button>
+        </div>
+
+        <div class="section">
+          <div class="section-title"><h2>Dịch vụ nổi bật</h2><button onclick="showView('services')">Xem tất cả</button></div>
+          <div class="service-scroll" id="homeServices"></div>
+        </div>
+
+        <div class="section" id="doctorSection">
+          <div class="section-title"><h2>Đội ngũ bác sĩ</h2><span class="muted" style="font-size:11px">Chuyên nghiệp · Tận tâm</span></div>
+          <div class="doctor-scroll" id="homeDoctors"></div>
+        </div>
+
+        <div class="section">
+          <div class="section-title"><h2>Cơ sở vật chất</h2><span class="muted" style="font-size:11px">Hình ảnh công khai</span></div>
+          <div class="facility-grid">
+            <div class="facility-img"><div class="fallback">🏥</div><img src="https://cdnvttimg.vttechsolution.com/ImageDocsys/_Library/phong-kham-nha-adora%2820231002111013%29.jpg" alt="Không gian Nha khoa Adora" onerror="this.style.display='none'"></div>
+            <div class="facility-img"><div class="fallback">🩻</div><img src="https://alltop.vn/backend/media/images/posts/1813/Nha_Khoa_Adora_Sai_Gon-295510.jpg" alt="Thiết bị chẩn đoán hình ảnh" onerror="this.style.display='none'"></div>
+            <div class="facility-img"><div class="fallback">🧑‍⚕️</div><img src="https://alltop.vn/backend/media/images/posts/2946/Nha_khoa_Adora_Sai_Gon-233277.png" alt="Tư vấn nha khoa" onerror="this.style.display='none'"></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title"><h2>Kiến thức răng miệng</h2><span class="muted" style="font-size:11px">Dành cho bạn</span></div>
+          <div class="news-scroll" id="homeNews"></div>
+        </div>
+
+        <div class="contact-card">
+          <h3>Cần tư vấn nhanh?</h3>
+          <p id="homeAddress">236 Đồng Khởi, P. Tam Hiệp, Đồng Nai</p>
+          <div class="contact-actions">
+            <a id="callBtn" class="btn btn-primary" href="tel:0968096868">☎ Gọi ngay</a>
+            <a id="zaloBtn" class="btn btn-outline" href="https://zalo.me/0968096868" target="_blank">💬 Chat Zalo</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="mini-view" id="view-services">
+        <div class="mini-page-head"><p class="eyebrow">DỊCH VỤ</p><h2>Chăm sóc nụ cười toàn diện</h2><p>Thông tin chi phí trong demo chỉ mang tính tham khảo.</p></div>
+        <div class="filter-chips" id="serviceFilters"></div>
+        <div class="service-list" id="serviceList"></div>
+      </section>
+
+      <section class="mini-view" id="view-booking">
+        <div class="mini-page-head"><p class="eyebrow">ĐẶT LỊCH</p><h2>Chọn thời gian phù hợp</h2><p>Adora sẽ tiếp nhận yêu cầu và xác nhận lịch với bạn.</p></div>
+        <div class="booking-wrap"><div class="booking-card" id="bookingCard"></div></div>
+      </section>
+
+      <section class="mini-view" id="view-appointments">
+        <div class="mini-page-head"><p class="eyebrow">LỊCH HẸN</p><h2>Tra cứu lịch của bạn</h2><p>Nhập số điện thoại đã dùng khi đặt lịch.</p></div>
+        <div class="lookup"><input id="lookupPhone" inputmode="tel" placeholder="Ví dụ: 0901234567"><button class="btn btn-primary" id="lookupBtn">Tra cứu</button></div>
+        <div class="appointment-list" id="appointmentList"></div>
+      </section>
+
+      <section class="mini-view" id="view-contact">
+        <div class="mini-page-head"><p class="eyebrow">LIÊN HỆ</p><h2>Ghé Nha Khoa Adora</h2><p>Thông tin demo lấy từ các nguồn công khai trên web.</p></div>
+        <div class="contact-page-card">
+          <a id="mapLink" class="map-demo" href="#" target="_blank"><div class="map-pin"></div></a>
+          <div class="contact-info">
+            <div class="contact-line"><div class="ci">📍</div><div><strong>Địa chỉ</strong><p id="contactAddress"></p></div></div>
+            <div class="contact-line"><div class="ci">☎</div><div><strong>Hotline</strong><p id="contactPhone"></p></div></div>
+            <div class="contact-line"><div class="ci">🕘</div><div><strong>Giờ làm việc</strong><p id="contactHours"></p></div></div>
+            <div class="contact-buttons"><a class="btn btn-primary" id="contactCall">Gọi hotline</a><a class="btn btn-outline" id="contactZalo" target="_blank">Chat Zalo</a></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="mini-nav" id="miniNav">
+      <button class="active" data-view="home"><span>⌂</span>Trang chủ</button>
+      <button data-view="services"><span>🦷</span>Dịch vụ</button>
+      <button data-view="booking"><span>＋</span>Đặt lịch</button>
+      <button data-view="appointments"><span>◷</span>Lịch hẹn</button>
+      <button data-view="contact"><span>⌖</span>Liên hệ</button>
+    </nav>
+  </div>
+</div>
+<div id="modalRoot"></div>
+<script src="assets/app.js"></script>
+<script>
+const A=window.AdoraDemo;
+let serviceFilter="Tất cả";
+let booking={step:1,serviceId:"",doctorId:"",date:"",time:"",customer:"",phone:"",note:""};
+function showView(v){
+  document.querySelectorAll(".mini-view").forEach(x=>x.classList.toggle("active",x.id==="view-"+v));
+  document.querySelectorAll("#miniNav button").forEach(x=>x.classList.toggle("active",x.dataset.view===v));
+  if(v==="booking")renderBooking();
+  if(v==="appointments")renderLookup();
+  window.scrollTo({top:0,behavior:"smooth"});
+  history.replaceState(null,"","#"+v);
+}
+window.showView=showView;
+document.getElementById("miniNav").onclick=e=>{const b=e.target.closest("[data-view]");if(b)showView(b.dataset.view)};
+function scrollDoctors(){document.getElementById("doctorSection").scrollIntoView({behavior:"smooth"});}
+window.scrollDoctors=scrollDoctors;
+
+function render(){
+  const d=A.getData(),s=d.settings;
+  miniBrand.textContent=s.brand;heroSlogan.textContent=s.slogan;homeAddress.textContent=s.address;
+  callBtn.href="tel:"+s.phone.replace(/\s/g,"");zaloBtn.href=s.zalo;
+  contactAddress.textContent=s.address;contactPhone.textContent=s.phone+(s.phone2?" · "+s.phone2:"");contactHours.textContent=s.hours;
+  contactCall.href="tel:"+s.phone.replace(/\s/g,"");contactZalo.href=s.zalo;mapLink.href=s.map;
+  renderHome(d);renderServices(d);renderLookup();
+}
+function renderHome(d){
+  const services=d.services.filter(x=>x.active).slice(0,5);
+  homeServices.innerHTML=services.map(s=>`<button class="service-card" onclick="openService('${s.id}')"><div class="service-art">${A.esc(s.icon)}</div><div class="service-body"><h3>${A.esc(s.name)}</h3><p>${A.esc(s.desc)}</p><div class="service-price">${A.esc(s.price)}</div></div></button>`).join("");
+  homeDoctors.innerHTML=d.doctors.filter(x=>x.active).map(doc=>`<div class="doctor-card"><div class="doctor-avatar">${A.esc(doc.name.split(" ").slice(-1)[0].slice(0,1))}</div><h3>${A.esc(doc.name)}</h3><p>${A.esc(doc.title)}<br>${A.esc(doc.focus)}</p></div>`).join("");
+  homeNews.innerHTML=d.news.filter(x=>x.active).map(n=>`<article class="news-card"><small>${A.esc(n.tag)}</small><h3>${A.esc(n.title)}</h3><p>${A.esc(n.excerpt)}</p></article>`).join("");
+}
+function renderServices(d){
+  const cats=["Tất cả",...new Set(d.services.filter(x=>x.active).map(x=>x.category))];
+  serviceFilters.innerHTML=cats.map(c=>`<button class="${serviceFilter===c?"active":""}" onclick="setFilter('${A.esc(c)}')">${A.esc(c)}</button>`).join("");
+  const list=d.services.filter(x=>x.active&&(serviceFilter==="Tất cả"||x.category===serviceFilter));
+  serviceList.innerHTML=list.map(s=>`<button class="service-row" onclick="openService('${s.id}')"><div class="service-art">${A.esc(s.icon)}</div><div><h3>${A.esc(s.name)}</h3><p>${A.esc(s.desc)}<br><strong style="color:#E9622B">${A.esc(s.price)}</strong></p></div><div class="arrow">›</div></button>`).join("");
+}
+window.setFilter=function(c){serviceFilter=c;renderServices(A.getData())};
+window.openService=function(id){
+  const d=A.getData(),s=A.serviceBy(d,id);
+  modal(`<div class="service-detail"><div class="service-detail-icon">${A.esc(s.icon)}</div><p class="eyebrow">${A.esc(s.category)}</p><h2>${A.esc(s.name)}</h2><p>${A.esc(s.desc)}</p><ul><li>Khám và tư vấn tình trạng thực tế.</li><li>Kế hoạch điều trị được cá nhân hóa.</li><li>Chi phí hiển thị chỉ là mức tham khảo trong demo.</li></ul><button class="btn btn-primary" style="width:100%" onclick="bookService('${s.id}')">Đặt lịch dịch vụ này</button></div>`);
+};
+function modal(body){
+  modalRoot.innerHTML=`<div class="modal-backdrop" id="mback"><div class="modal"><div class="modal-head"><h3>Thông tin dịch vụ</h3><button class="icon-btn" id="mclose">✕</button></div><div class="modal-body">${body}</div></div></div>`;
+  mclose.onclick=()=>modalRoot.innerHTML="";mback.onclick=e=>{if(e.target===mback)modalRoot.innerHTML=""};
+}
+window.bookService=function(id){modalRoot.innerHTML="";booking={step:1,serviceId:id,doctorId:"",date:"",time:"",customer:"",phone:localStorage.getItem("adora_last_phone")||"",note:""};showView("booking")};
+
+function renderBooking(){
+  const d=A.getData();
+  const step=Math.min(4,Math.max(1,booking.step));
+  const bars=[1,2,3,4].map(i=>`<div class="booking-step ${i<=step?"active":""}"></div>`).join("");
+  let content="";
+  if(step===1){
+    content=`<h3>1. Chọn dịch vụ</h3><p>Bạn muốn được tư vấn dịch vụ nào?</p><div class="choice-grid">${d.services.filter(s=>s.active).map(s=>`<button class="choice ${booking.serviceId===s.id?"active":""}" onclick="pickService('${s.id}')"><strong>${A.esc(s.icon)} ${A.esc(s.name)}</strong><span>${A.esc(s.price)}</span></button>`).join("")}</div>`;
+  }else if(step===2){
+    content=`<h3>2. Chọn bác sĩ</h3><p>Có thể bỏ qua để Adora sắp xếp bác sĩ phù hợp.</p><div class="choice-grid"><button class="choice ${!booking.doctorId?"active":""}" onclick="pickDoctor('')"><strong>👥 Adora sắp xếp</strong><span>Bác sĩ phù hợp lịch</span></button>${d.doctors.filter(x=>x.active).map(doc=>`<button class="choice ${booking.doctorId===doc.id?"active":""}" onclick="pickDoctor('${doc.id}')"><strong>${A.esc(doc.name)}</strong><span>${A.esc(doc.focus)}</span></button>`).join("")}</div>`;
+  }else if(step===3){
+    const min=new Date().toISOString().slice(0,10);
+    content=`<h3>3. Ngày & khung giờ</h3><p>Chọn thời gian mong muốn. Nhân viên sẽ xác nhận lại.</p>
+    <div class="field"><label>Ngày khám</label><input type="date" id="bookingDate" min="${min}" value="${A.esc(booking.date)}" onchange="booking.date=this.value"></div>
+    <div style="height:12px"></div><div class="slot-grid">${["08:00","09:30","11:00","14:00","15:30","17:30","19:00"].map(t=>`<button class="slot ${booking.time===t?"active":""}" onclick="pickTime('${t}')">${t}</button>`).join("")}</div>`;
+  }else{
+    const sv=A.serviceBy(d,booking.serviceId),doc=A.doctorBy(d,booking.doctorId);
+    content=`<h3>4. Thông tin liên hệ</h3><p>${A.esc(sv.name||"Dịch vụ")} · ${booking.date?A.formatDate(booking.date):"Chưa chọn ngày"} ${A.esc(booking.time)}${doc.name?" · "+A.esc(doc.name):""}</p>
+      <div class="form-grid" style="grid-template-columns:1fr">
+        <div class="field"><label>Họ và tên</label><input id="bName" value="${A.esc(booking.customer)}" placeholder="Nguyễn Văn A"></div>
+        <div class="field"><label>Số điện thoại</label><input id="bPhone" inputmode="tel" value="${A.esc(booking.phone)}" placeholder="0901234567"></div>
+        <div class="field"><label>Ghi chú</label><textarea id="bNote" placeholder="Nhu cầu hoặc tình trạng cần tư vấn...">${A.esc(booking.note)}</textarea></div>
+      </div>`;
+  }
+  bookingCard.innerHTML=`<div class="booking-steps">${bars}</div>${content}<div class="booking-actions">${step>1?`<button class="btn btn-outline" onclick="bookingBack()">← Quay lại</button>`:""}<button class="btn btn-primary" onclick="${step===4?"submitBooking()":"bookingNext()"}">${step===4?"Gửi yêu cầu đặt lịch":"Tiếp tục →"}</button></div>`;
+}
+window.pickService=id=>{booking.serviceId=id;renderBooking()};
+window.pickDoctor=id=>{booking.doctorId=id;renderBooking()};
+window.pickTime=t=>{booking.time=t;renderBooking()};
+window.bookingBack=()=>{booking.step=Math.max(1,booking.step-1);renderBooking()};
+window.bookingNext=()=>{
+  if(booking.step===1&&!booking.serviceId)return A.toast("Vui lòng chọn dịch vụ");
+  if(booking.step===3){const el=document.getElementById("bookingDate");booking.date=el?el.value:booking.date;if(!booking.date||!booking.time)return A.toast("Vui lòng chọn ngày và giờ");}
+  booking.step=Math.min(4,booking.step+1);renderBooking();
+};
+window.submitBooking=()=>{
+  booking.customer=bName.value.trim();booking.phone=bPhone.value.trim();booking.note=bNote.value.trim();
+  if(!booking.customer||!booking.phone)return A.toast("Vui lòng nhập họ tên và số điện thoại");
+  const d=A.getData(),stamp=new Date();
+  const id="AD"+stamp.toISOString().slice(2,10).replaceAll("-","")+String(d.appointments.length+1).padStart(2,"0");
+  d.appointments.unshift({id,createdAt:stamp.toISOString(),customer:booking.customer,phone:booking.phone,serviceId:booking.serviceId,doctorId:booking.doctorId,date:booking.date,time:booking.time,status:"pending",note:booking.note});
+  A.setData(d);localStorage.setItem("adora_last_phone",booking.phone);
+  lookupPhone.value=booking.phone;
+  A.toast("Đã gửi yêu cầu đặt lịch");
+  booking={step:1,serviceId:"",doctorId:"",date:"",time:"",customer:"",phone:booking.phone,note:""};
+  showView("appointments");
+};
+function renderLookup(){
+  const phone=(lookupPhone?.value||localStorage.getItem("adora_last_phone")||"").replace(/\s/g,"");
+  if(lookupPhone&&!lookupPhone.value&&phone)lookupPhone.value=phone;
+  const d=A.getData();
+  if(!phone){appointmentList.innerHTML=`<div class="empty"><div class="emoji">📅</div>Nhập số điện thoại để xem lịch hẹn.</div>`;return;}
+  const arr=d.appointments.filter(x=>x.phone.replace(/\s/g,"")===phone).sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));
+  appointmentList.innerHTML=arr.length?arr.map(x=>{
+    const sv=A.serviceBy(d,x.serviceId),doc=A.doctorBy(d,x.doctorId);
+    return `<div class="appointment-card">
+      <div class="top"><div><h3>${A.esc(sv.name||"Lịch khám")}</h3><p>Mã lịch ${A.esc(x.id)}</p></div><span class="badge ${x.status}">${A.statusLabel(x.status)}</span></div>
+      <div class="meta"><div><span>Ngày khám</span><strong>${A.formatDate(x.date)}</strong></div><div><span>Khung giờ</span><strong>${A.esc(x.time)}</strong></div><div><span>Bác sĩ</span><strong>${A.esc(doc.name||"Adora sắp xếp")}</strong></div><div><span>Ghi chú</span><strong>${A.esc(x.note||"—")}</strong></div></div>
+      ${["pending","confirmed"].includes(x.status)?`<button class="btn btn-sm btn-outline" style="margin-top:10px;width:100%" onclick="cancelAppointment('${x.id}')">Yêu cầu hủy lịch</button>`:""}
+    </div>`;
+  }).join(""):`<div class="empty"><div class="emoji">🔎</div>Chưa tìm thấy lịch hẹn với số điện thoại này.</div>`;
+}
+lookupBtn.onclick=()=>{localStorage.setItem("adora_last_phone",lookupPhone.value.trim());renderLookup()};
+lookupPhone.addEventListener("keydown",e=>{if(e.key==="Enter")lookupBtn.click()});
+window.cancelAppointment=function(id){
+  if(!confirm("Bạn muốn gửi yêu cầu hủy lịch này?"))return;
+  const d=A.getData(),x=d.appointments.find(a=>a.id===id);if(x){x.status="cancelled";A.setData(d);A.toast("Đã cập nhật lịch thành hủy");renderLookup();}
+};
+
+window.addEventListener("storage",render);window.addEventListener("adora:data",render);
+render();
+const hash=location.hash.replace("#","");if(["home","services","booking","appointments","contact"].includes(hash))showView(hash);
+</script>
+</body>
+</html>
