@@ -1,303 +1,64 @@
 <!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Adora Admin Portal — Demo</title>
-  <link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-<div class="admin-shell">
-  <aside class="admin-sidebar">
-    <div class="brand">
-      <div class="brand-mark brand-logo-wrap"><img id="adminLogo" src="https://nhakhoaadora.com/wp-content/uploads/2025/08/ICON-TAG-WEB-02.png" alt="Adora"></div>
-      <div><strong>ADORA</strong><small>Admin Portal</small></div>
-    </div>
-    <nav class="admin-nav" id="adminNav">
-      <button class="active" data-section="dashboard">⌂ Dashboard</button>
-      <button data-section="appointments">◷ Lịch hẹn</button>
-      <button data-section="services">✦ Dịch vụ</button>
-      <button data-section="doctors">♙ Bác sĩ</button>
-      <button data-section="news">▤ Bài viết</button>
-      <button data-section="settings">⚙ Cấu hình</button>
-    </nav>
-    <div class="sidebar-bottom">
-      <a class="btn btn-primary" href="miniapp.html" target="_blank">📱 Mở Mini App</a>
-      <button class="btn btn-outline" id="resetDemo">↻ Reset dữ liệu demo</button>
-    </div>
-  </aside>
-  <main class="admin-main">
-    <header class="admin-topbar">
-      <h1 id="topTitle">Dashboard</h1>
-      <div style="display:flex;gap:9px;align-items:center">
-        <span class="badge">● LocalStorage Demo</span>
-        <a href="index.html" class="icon-btn" title="Trang mở đầu">⌂</a>
-      </div>
-    </header>
-    <div class="admin-content">
-      <section class="admin-section active" id="dashboard">
-        <div class="page-head">
-          <div><h2>Tổng quan hoạt động</h2><p>Tổng hợp lịch hẹn và nội dung Mini App.</p></div>
-          <a href="miniapp.html#booking" target="_blank" class="btn btn-primary">＋ Tạo lịch từ Mini App</a>
-        </div>
-        <div class="metric-grid" id="metricGrid"></div>
-        <div class="admin-grid">
-          <div class="card panel">
-            <div class="panel-head"><h3>Lịch hẹn sắp tới</h3><button class="btn btn-sm btn-outline" data-go="appointments">Xem tất cả</button></div>
-            <div class="list-stack" id="upcomingList"></div>
-          </div>
-          <div class="card panel">
-            <div class="panel-head"><h3>Lịch hẹn 7 ngày</h3><span class="badge">Demo</span></div>
-            <div class="chart-bars" id="chartBars"></div>
-          </div>
-        </div>
-      </section>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Adora Admin Portal — Member Demo V3</title><link rel="stylesheet" href="assets/style.css"></head>
+<body><div class="admin-shell">
+<aside class="admin-sidebar">
+  <div class="brand"><div class="brand-mark brand-logo-wrap"><img id="adminLogo" src="" alt="Adora"></div><div><strong>ADORA</strong><small>Admin Portal V3</small></div></div>
+  <nav class="admin-nav" id="adminNav">
+    <button class="active" data-section="dashboard">⌂ Dashboard</button>
+    <button data-section="appointments">◷ Lịch hẹn</button>
+    <button data-section="customers">👥 Khách hàng</button>
+    <button data-section="loyalty">⭐ Loyalty</button>
+    <button data-section="vouchers">🎟 Voucher</button>
+    <button data-section="services">✦ Dịch vụ</button>
+    <button data-section="doctors">♙ Bác sĩ</button>
+    <button data-section="settings">⚙ Cấu hình</button>
+  </nav>
+  <div class="sidebar-bottom"><a class="btn btn-primary" href="miniapp.html" target="_blank">📱 Mở Mini App</a><button class="btn btn-outline" id="resetDemo">↻ Reset demo</button></div>
+</aside>
+<main class="admin-main"><header class="admin-topbar"><h1 id="topTitle">Dashboard</h1><div style="display:flex;gap:9px;align-items:center"><span class="badge">● LocalStorage V3</span><a href="index.html" class="icon-btn">⌂</a></div></header>
+<div class="admin-content">
+<section class="admin-section active" id="dashboard"><div class="page-head"><div><h2>Member & vận hành</h2><p>Dashboard cho lịch hẹn, thành viên và loyalty.</p></div><a class="btn btn-primary" target="_blank" href="miniapp.html#account">Xem Member Center</a></div><div class="metric-grid" id="metricGrid"></div><div class="admin-grid"><div class="card panel"><div class="panel-head"><h3>Lịch hẹn gần nhất</h3></div><div class="list-stack" id="upcomingList"></div></div><div class="card panel"><div class="panel-head"><h3>Thành viên nổi bật</h3></div><div class="list-stack" id="topMembers"></div></div></div></section>
 
-      <section class="admin-section" id="appointments">
-        <div class="page-head">
-          <div><h2>Quản lý lịch hẹn</h2><p>Xác nhận, hoàn tất hoặc hủy lịch khách đặt từ Mini App.</p></div>
-          <button class="btn btn-primary" id="addAppointment">＋ Thêm lịch hẹn</button>
-        </div>
-        <div class="toolbar">
-          <div class="search"><input id="appointmentSearch" placeholder="Tìm tên, số điện thoại, mã lịch..." style="width:100%"></div>
-          <select id="statusFilter">
-            <option value="">Tất cả trạng thái</option>
-            <option value="pending">Chờ xác nhận</option>
-            <option value="confirmed">Đã xác nhận</option>
-            <option value="completed">Đã hoàn tất</option>
-            <option value="cancelled">Đã hủy</option>
-          </select>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Mã</th><th>Khách hàng</th><th>Dịch vụ</th><th>Lịch khám</th><th>Bác sĩ</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
-            <tbody id="appointmentRows"></tbody>
-          </table>
-        </div>
-      </section>
+<section class="admin-section" id="appointments"><div class="page-head"><div><h2>Lịch hẹn</h2><p>Xác nhận hoặc thay đổi trạng thái lịch đặt từ Mini App.</p></div></div><div class="toolbar"><div class="search"><input id="appointmentSearch" placeholder="Tìm tên, SĐT, mã lịch..." style="width:100%"></div><select id="statusFilter"><option value="">Tất cả trạng thái</option><option value="pending">Chờ xác nhận</option><option value="confirmed">Đã xác nhận</option><option value="completed">Đã hoàn tất</option><option value="cancelled">Đã hủy</option></select></div><div class="table-wrap"><table><thead><tr><th>Mã</th><th>Khách hàng</th><th>Dịch vụ</th><th>Lịch khám</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody id="appointmentRows"></tbody></table></div></section>
 
-      <section class="admin-section" id="services">
-        <div class="page-head">
-          <div><h2>Dịch vụ</h2><p>Dữ liệu này hiển thị trực tiếp trên Mini App.</p></div>
-          <button class="btn btn-primary" id="addService">＋ Thêm dịch vụ</button>
-        </div>
-        <div class="entity-grid" id="serviceGrid"></div>
-      </section>
+<section class="admin-section" id="customers"><div class="page-head"><div><h2>Khách hàng / Thành viên</h2><p>Điểm được cộng/trừ thủ công ở giai đoạn demo, chưa gắn với chi tiêu.</p></div><button class="btn btn-primary" id="addCustomerBtn">＋ Thêm thành viên</button></div><div class="toolbar"><div class="search"><input id="customerSearch" placeholder="Tìm tên, SĐT, mã thành viên..." style="width:100%"></div></div><div class="table-wrap"><table><thead><tr><th>Mã TV</th><th>Khách hàng</th><th>Hạng</th><th>Điểm</th><th>Lần khám</th><th>Voucher</th><th>Thao tác</th></tr></thead><tbody id="customerRows"></tbody></table></div></section>
 
-      <section class="admin-section" id="doctors">
-        <div class="page-head">
-          <div><h2>Đội ngũ bác sĩ</h2><p>Quản lý hồ sơ bác sĩ dùng trên Mini App và form đặt lịch.</p></div>
-          <button class="btn btn-primary" id="addDoctor">＋ Thêm bác sĩ</button>
-        </div>
-        <div class="entity-grid" id="doctorGrid"></div>
-      </section>
+<section class="admin-section" id="loyalty"><div class="page-head"><div><h2>Loyalty & điểm</h2><p>Admin chủ động điều chỉnh điểm; quy tắc tính điểm tự động có thể bổ sung sau.</p></div><button class="btn btn-primary" id="adjustPointsBtn">± Điều chỉnh điểm</button></div><div class="loyalty-grid"><div class="card panel"><div class="panel-head"><h3>Hạng thành viên</h3></div><div class="tier-list" id="tierList"></div></div><div class="card panel"><div class="panel-head"><h3>Giao dịch điểm gần nhất</h3></div><div class="table-wrap"><table style="min-width:560px"><thead><tr><th>Khách hàng</th><th>Nội dung</th><th>Điểm</th><th>Thời gian</th></tr></thead><tbody id="pointRows"></tbody></table></div></div></div></section>
 
-      <section class="admin-section" id="news">
-        <div class="page-head">
-          <div><h2>Tin tức & kiến thức</h2><p>Nội dung chăm sóc răng miệng hiển thị tại trang chủ Mini App.</p></div>
-          <button class="btn btn-primary" id="addNews">＋ Thêm bài viết</button>
-        </div>
-        <div class="entity-grid" id="newsGrid"></div>
-      </section>
+<section class="admin-section" id="vouchers"><div class="page-head"><div><h2>Voucher</h2><p>Thành viên có thể dùng điểm để đổi voucher trên Mini App.</p></div><button class="btn btn-primary" id="addVoucherBtn">＋ Thêm voucher</button></div><div class="entity-grid" id="voucherGrid"></div></section>
 
-      <section class="admin-section" id="settings">
-        <div class="page-head"><div><h2>Cấu hình thương hiệu</h2><p>Thông tin liên hệ và nhận diện dùng cho toàn bộ demo.</p></div></div>
-        <div class="card settings-card">
-          <form id="settingsForm" class="form-grid">
-            <div class="field"><label>Tên thương hiệu</label><input name="brand"></div>
-            <div class="field"><label>Slogan</label><input name="slogan"></div>
-            <div class="field"><label>Hotline chính</label><input name="phone"></div>
-            <div class="field"><label>Hotline phụ</label><input name="phone2"></div>
-            <div class="field span-2"><label>Địa chỉ</label><input name="address"></div>
-            <div class="field"><label>Giờ làm việc</label><input name="hours"></div>
-            <div class="field"><label>Website</label><input name="website"></div>
-            <div class="field"><label>Logo URL</label><input name="logo"></div>
-            <div class="field"><label>Zalo URL</label><input name="zalo"></div>
-            <div class="field"><label>Google Maps URL</label><input name="map"></div>
-            <div class="span-2"><button class="btn btn-primary" type="submit">Lưu cấu hình</button></div>
-          </form>
-        </div>
-      </section>
-    </div>
-  </main>
-</div>
-<div id="modalRoot"></div>
-<script src="assets/app.js"></script>
-<script>
+<section class="admin-section" id="services"><div class="page-head"><div><h2>Dịch vụ</h2><p>Dịch vụ hiển thị trên Mini App.</p></div></div><div class="entity-grid" id="serviceGrid"></div></section>
+<section class="admin-section" id="doctors"><div class="page-head"><div><h2>Đội ngũ bác sĩ</h2><p>Thông tin tham khảo từ website Adora.</p></div></div><div class="entity-grid" id="doctorGrid"></div></section>
+
+<section class="admin-section" id="settings"><div class="page-head"><div><h2>Cấu hình</h2><p>Thông tin thương hiệu và ngưỡng hạng thành viên.</p></div></div><div class="card settings-card"><form id="settingsForm" class="form-grid"><div class="field"><label>Tên thương hiệu</label><input name="brand"></div><div class="field"><label>Slogan</label><input name="slogan"></div><div class="field"><label>Hotline</label><input name="phone"></div><div class="field"><label>Hotline phụ</label><input name="phone2"></div><div class="field span-2"><label>Cơ sở 1</label><input name="address"></div><div class="field span-2"><label>Cơ sở 2</label><input name="address2"></div><div class="field"><label>Giờ làm việc</label><input name="hours"></div><div class="field"><label>Logo URL</label><input name="logo"></div><div class="span-2"><button class="btn btn-primary">Lưu cấu hình</button></div></form></div></section>
+</div></main></div>
+<div id="modalRoot"></div><script src="assets/app.js"></script><script>
 const A=window.AdoraDemo;
-const titleMap={dashboard:"Dashboard",appointments:"Lịch hẹn",services:"Dịch vụ",doctors:"Bác sĩ",news:"Bài viết",settings:"Cấu hình"};
-function goSection(id){
-  document.querySelectorAll(".admin-section").forEach(x=>x.classList.toggle("active",x.id===id));
-  document.querySelectorAll("#adminNav button").forEach(x=>x.classList.toggle("active",x.dataset.section===id));
-  document.getElementById("topTitle").textContent=titleMap[id]||id;
-}
-document.getElementById("adminNav").addEventListener("click",e=>{const b=e.target.closest("button[data-section]");if(b)goSection(b.dataset.section)});
-document.addEventListener("click",e=>{const b=e.target.closest("[data-go]");if(b)goSection(b.dataset.go)});
-
-function renderAll(){
-  const data=A.getData();
-  renderDashboard(data);renderAppointments(data);renderServices(data);renderDoctors(data);renderNews(data);renderSettings(data);
-}
-function renderDashboard(data){
-  const ap=data.appointments;
-  const customers=new Set(ap.map(x=>x.phone)).size;
-  const pending=ap.filter(x=>x.status==="pending").length;
-  const confirmed=ap.filter(x=>x.status==="confirmed").length;
-  document.getElementById("metricGrid").innerHTML=[
-    ["Tổng lịch hẹn",ap.length,"+ dữ liệu Mini App"],
-    ["Chờ xác nhận",pending,"Cần xử lý"],
-    ["Đã xác nhận",confirmed,"Sẵn sàng phục vụ"],
-    ["Khách hàng",customers,"Theo SĐT duy nhất"]
-  ].map(x=>`<div class="card metric"><div class="label">${x[0]}</div><div class="value">${x[1]}</div><div class="delta">${x[2]}</div></div>`).join("");
-  const upcoming=[...ap].filter(x=>x.status!=="cancelled"&&x.status!=="completed").sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,5);
-  document.getElementById("upcomingList").innerHTML=upcoming.length?upcoming.map(x=>{
-    const d=new Date(x.date+"T00:00:00"),sv=A.serviceBy(data,x.serviceId);
-    return `<div class="appointment-mini">
-      <div class="date-chip"><span><strong>${String(d.getDate()).padStart(2,"0")}</strong>TH${d.getMonth()+1}</span></div>
-      <div><strong>${A.esc(x.customer)}</strong><p>${A.esc(sv.name||"Dịch vụ")} · ${x.time} · ${A.esc(x.phone)}</p></div>
-      <span class="badge ${x.status}">${A.statusLabel(x.status)}</span>
-    </div>`;
-  }).join(""):`<div class="empty">Chưa có lịch hẹn sắp tới.</div>`;
-  const counts=[1,3,2,4,2,5,3].map((n,i)=>Math.max(n,ap.filter(x=>new Date(x.createdAt).getDay()===i).length));
-  const labels=["T2","T3","T4","T5","T6","T7","CN"],max=Math.max(...counts);
-  document.getElementById("chartBars").innerHTML=counts.map((n,i)=>`<div class="chart-col"><div class="chart-bar" style="height:${Math.round((n/max)*100)}%"></div><span>${labels[i]}</span></div>`).join("");
-}
-function renderAppointments(data){
-  const q=(document.getElementById("appointmentSearch").value||"").toLowerCase();
-  const st=document.getElementById("statusFilter").value;
-  const rows=[...data.appointments].sort((a,b)=>(b.createdAt||"").localeCompare(a.createdAt||"")).filter(x=>{
-    const sv=A.serviceBy(data,x.serviceId),doc=A.doctorBy(data,x.doctorId);
-    return (!st||x.status===st) && (!q||[x.id,x.customer,x.phone,sv.name,doc.name].join(" ").toLowerCase().includes(q));
-  });
-  document.getElementById("appointmentRows").innerHTML=rows.map(x=>{
-    const sv=A.serviceBy(data,x.serviceId),doc=A.doctorBy(data,x.doctorId);
-    return `<tr>
-      <td><strong>${A.esc(x.id)}</strong></td>
-      <td><strong>${A.esc(x.customer)}</strong><br><span class="muted">${A.esc(x.phone)}</span></td>
-      <td>${A.esc(sv.name||"—")}</td>
-      <td><strong>${A.formatDate(x.date)}</strong><br><span class="muted">${A.esc(x.time)}</span></td>
-      <td>${A.esc(doc.name||"Chưa chọn")}</td>
-      <td><span class="badge ${x.status}">${A.statusLabel(x.status)}</span></td>
-      <td><div class="table-actions">
-        <button class="btn btn-sm btn-outline" onclick="editAppointment('${x.id}')">Sửa</button>
-        ${x.status==="pending"?`<button class="btn btn-sm btn-primary" onclick="setStatus('${x.id}','confirmed')">Xác nhận</button>`:""}
-      </div></td>
-    </tr>`;
-  }).join("") || `<tr><td colspan="7" class="empty">Không có dữ liệu phù hợp.</td></tr>`;
-}
-document.getElementById("appointmentSearch").addEventListener("input",()=>renderAppointments(A.getData()));
-document.getElementById("statusFilter").addEventListener("change",()=>renderAppointments(A.getData()));
-
-function setStatus(id,status){
-  const data=A.getData(),x=data.appointments.find(a=>a.id===id);if(!x)return;x.status=status;A.setData(data);A.toast("Đã cập nhật trạng thái");renderAll();
-}
-function modal(title,body,onSave,saveText="Lưu"){
-  document.getElementById("modalRoot").innerHTML=`<div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal"><div class="modal-head"><h3>${title}</h3><button class="icon-btn" id="closeModal">✕</button></div>
-    <div class="modal-body">${body}</div><div class="modal-actions"><button class="btn btn-outline" id="cancelModal">Hủy</button><button class="btn btn-primary" id="saveModal">${saveText}</button></div></div></div>`;
-  const close=()=>document.getElementById("modalRoot").innerHTML="";
-  document.getElementById("closeModal").onclick=close;document.getElementById("cancelModal").onclick=close;
-  document.getElementById("modalBackdrop").onclick=e=>{if(e.target.id==="modalBackdrop")close()};
-  document.getElementById("saveModal").onclick=()=>{if(onSave(close)!==false)close()};
-}
-function appointmentForm(x={}){
-  const data=A.getData();
-  return `<div class="form-grid">
-    <div class="field"><label>Khách hàng</label><input id="fCustomer" value="${A.esc(x.customer||"")}"></div>
-    <div class="field"><label>Số điện thoại</label><input id="fPhone" value="${A.esc(x.phone||"")}"></div>
-    <div class="field"><label>Dịch vụ</label><select id="fService">${data.services.filter(s=>s.active).map(s=>`<option value="${s.id}" ${x.serviceId===s.id?"selected":""}>${A.esc(s.name)}</option>`).join("")}</select></div>
-    <div class="field"><label>Bác sĩ</label><select id="fDoctor"><option value="">Chưa chọn</option>${data.doctors.filter(d=>d.active).map(d=>`<option value="${d.id}" ${x.doctorId===d.id?"selected":""}>${A.esc(d.name)}</option>`).join("")}</select></div>
-    <div class="field"><label>Ngày khám</label><input id="fDate" type="date" value="${A.esc(x.date||new Date().toISOString().slice(0,10))}"></div>
-    <div class="field"><label>Giờ</label><input id="fTime" type="time" value="${A.esc(x.time||"09:00")}"></div>
-    <div class="field"><label>Trạng thái</label><select id="fStatus">${["pending","confirmed","completed","cancelled"].map(s=>`<option value="${s}" ${x.status===s?"selected":""}>${A.statusLabel(s)}</option>`).join("")}</select></div>
-    <div class="field"><label>Ghi chú</label><input id="fNote" value="${A.esc(x.note||"")}"></div>
-  </div>`;
-}
-window.editAppointment=function(id){
-  const data=A.getData(),x=data.appointments.find(a=>a.id===id);
-  modal("Cập nhật lịch hẹn",appointmentForm(x),()=>{
-    const d=A.getData(),a=d.appointments.find(z=>z.id===id);
-    Object.assign(a,{customer:fCustomer.value.trim(),phone:fPhone.value.trim(),serviceId:fService.value,doctorId:fDoctor.value,date:fDate.value,time:fTime.value,status:fStatus.value,note:fNote.value.trim()});
-    if(!a.customer||!a.phone||!a.date)return A.toast("Vui lòng nhập đủ thông tin"),false;
-    A.setData(d);A.toast("Đã lưu lịch hẹn");renderAll();
-  });
-};
-document.getElementById("addAppointment").onclick=()=>modal("Thêm lịch hẹn",appointmentForm({status:"pending"}),()=>{
-  const d=A.getData();if(!fCustomer.value.trim()||!fPhone.value.trim()||!fDate.value)return A.toast("Vui lòng nhập đủ thông tin"),false;
-  d.appointments.unshift({id:"AD"+new Date().toISOString().slice(2,10).replaceAll("-","")+String(d.appointments.length+1).padStart(2,"0"),createdAt:new Date().toISOString(),customer:fCustomer.value.trim(),phone:fPhone.value.trim(),serviceId:fService.value,doctorId:fDoctor.value,date:fDate.value,time:fTime.value,status:fStatus.value,note:fNote.value.trim()});
-  A.setData(d);A.toast("Đã thêm lịch hẹn");renderAll();
-});
-
-function renderServices(data){
-  document.getElementById("serviceGrid").innerHTML=data.services.map(s=>`<div class="card entity-card">
-    <div class="entity-top"><div class="entity-avatar">${s.image?`<img src="${A.esc(s.image)}" alt="${A.esc(s.name)}" onerror="this.remove()">`:A.esc(s.icon)}</div><span class="badge">${s.active?"Đang hiển thị":"Đang ẩn"}</span></div>
-    <div><h4>${A.esc(s.name)}</h4><p>${A.esc(s.desc)}</p></div>
-    <div class="entity-meta"><span class="badge">${A.esc(s.category)}</span><span class="badge">${A.esc(s.price)}</span></div>
-    <div class="table-actions"><button class="btn btn-sm btn-outline" onclick="editService('${s.id}')">Sửa</button><button class="btn btn-sm btn-outline" onclick="toggleEntity('services','${s.id}')">${s.active?"Ẩn":"Hiện"}</button></div>
-  </div>`).join("");
-}
-function serviceForm(s={}){
-  return `<div class="form-grid">
-    <div class="field"><label>Tên dịch vụ</label><input id="sName" value="${A.esc(s.name||"")}"></div>
-    <div class="field"><label>Biểu tượng</label><input id="sIcon" value="${A.esc(s.icon||"🦷")}"></div>
-    <div class="field"><label>Nhóm</label><input id="sCategory" value="${A.esc(s.category||"Tổng quát")}"></div>
-    <div class="field"><label>Chi phí tham khảo</label><input id="sPrice" value="${A.esc(s.price||"Liên hệ tư vấn")}"></div>
-    <div class="field span-2"><label>Ảnh dịch vụ (URL)</label><input id="sImage" value="${A.esc(s.image||"")}" placeholder="https://..."></div>
-    <div class="field span-2"><label>Mô tả</label><textarea id="sDesc">${A.esc(s.desc||"")}</textarea></div>
-  </div>`;
-}
-window.editService=function(id){const d=A.getData(),s=d.services.find(x=>x.id===id);modal("Sửa dịch vụ",serviceForm(s),()=>{const data=A.getData(),x=data.services.find(z=>z.id===id);Object.assign(x,{name:sName.value.trim(),icon:sIcon.value.trim()||"🦷",category:sCategory.value.trim(),price:sPrice.value.trim(),image:sImage.value.trim(),desc:sDesc.value.trim()});if(!x.name)return false;A.setData(data);A.toast("Đã cập nhật dịch vụ");renderAll()})};
-document.getElementById("addService").onclick=()=>modal("Thêm dịch vụ",serviceForm(),()=>{const d=A.getData();if(!sName.value.trim())return false;d.services.push({id:A.uid("sv"),name:sName.value.trim(),icon:sIcon.value.trim()||"🦷",category:sCategory.value.trim(),price:sPrice.value.trim(),image:sImage.value.trim(),desc:sDesc.value.trim(),active:true});A.setData(d);A.toast("Đã thêm dịch vụ");renderAll()});
-
-function renderDoctors(data){
-  document.getElementById("doctorGrid").innerHTML=data.doctors.map(d=>`<div class="card entity-card">
-    <div class="entity-top"><div class="entity-avatar">${d.image?`<img src="${A.esc(d.image)}" alt="${A.esc(d.name)}" onerror="this.remove()">`:A.esc(d.name.split(" ").slice(-1)[0].slice(0,1))}</div><span class="badge">${d.active?"Đang hiển thị":"Đang ẩn"}</span></div>
-    <div><h4>${A.esc(d.name)}</h4><p>${A.esc(d.title)}<br>${A.esc(d.focus)}</p></div>
-    <div class="table-actions"><button class="btn btn-sm btn-outline" onclick="editDoctor('${d.id}')">Sửa</button><button class="btn btn-sm btn-outline" onclick="toggleEntity('doctors','${d.id}')">${d.active?"Ẩn":"Hiện"}</button></div>
-  </div>`).join("");
-}
-function doctorForm(d={}){
-  return `<div class="form-grid">
-    <div class="field span-2"><label>Họ tên</label><input id="dName" value="${A.esc(d.name||"")}"></div>
-    <div class="field"><label>Học vị / chức danh</label><input id="dTitle" value="${A.esc(d.title||"Bác sĩ chuyên khoa")}"></div>
-    <div class="field"><label>Chuyên môn</label><input id="dFocus" value="${A.esc(d.focus||"Nha khoa tổng quát")}"></div>
-    <div class="field span-2"><label>Ảnh bác sĩ (URL)</label><input id="dImage" value="${A.esc(d.image||"")}" placeholder="https://..."></div>
-  </div>`;
-}
-window.editDoctor=function(id){const d=A.getData(),x=d.doctors.find(z=>z.id===id);modal("Sửa bác sĩ",doctorForm(x),()=>{const data=A.getData(),z=data.doctors.find(y=>y.id===id);Object.assign(z,{name:dName.value.trim(),title:dTitle.value.trim(),focus:dFocus.value.trim(),image:dImage.value.trim()});if(!z.name)return false;A.setData(data);A.toast("Đã cập nhật bác sĩ");renderAll()})};
-document.getElementById("addDoctor").onclick=()=>modal("Thêm bác sĩ",doctorForm(),()=>{const d=A.getData();if(!dName.value.trim())return false;d.doctors.push({id:A.uid("dr"),name:dName.value.trim(),title:dTitle.value.trim(),focus:dFocus.value.trim(),image:dImage.value.trim(),active:true});A.setData(d);A.toast("Đã thêm bác sĩ");renderAll()});
-
-function renderNews(data){
-  document.getElementById("newsGrid").innerHTML=data.news.map(n=>`<div class="card entity-card">
-    <div class="entity-top"><div class="entity-avatar">▤</div><span class="badge">${n.active?"Đang hiển thị":"Đang ẩn"}</span></div>
-    <div><h4>${A.esc(n.title)}</h4><p>${A.esc(n.excerpt)}</p></div>
-    <div class="entity-meta"><span class="badge">${A.esc(n.tag)}</span></div>
-    <div class="table-actions"><button class="btn btn-sm btn-outline" onclick="editNews('${n.id}')">Sửa</button><button class="btn btn-sm btn-outline" onclick="toggleEntity('news','${n.id}')">${n.active?"Ẩn":"Hiện"}</button></div>
-  </div>`).join("");
-}
-function newsForm(n={}){
-  return `<div class="form-grid">
-    <div class="field span-2"><label>Tiêu đề</label><input id="nTitle" value="${A.esc(n.title||"")}"></div>
-    <div class="field"><label>Chuyên mục</label><input id="nTag" value="${A.esc(n.tag||"Kiến thức")}"></div>
-    <div class="field span-2"><label>Mô tả ngắn</label><textarea id="nExcerpt">${A.esc(n.excerpt||"")}</textarea></div>
-  </div>`;
-}
-window.editNews=function(id){const d=A.getData(),x=d.news.find(z=>z.id===id);modal("Sửa bài viết",newsForm(x),()=>{const data=A.getData(),z=data.news.find(y=>y.id===id);Object.assign(z,{title:nTitle.value.trim(),tag:nTag.value.trim(),excerpt:nExcerpt.value.trim()});if(!z.title)return false;A.setData(data);A.toast("Đã cập nhật bài viết");renderAll()})};
-document.getElementById("addNews").onclick=()=>modal("Thêm bài viết",newsForm(),()=>{const d=A.getData();if(!nTitle.value.trim())return false;d.news.push({id:A.uid("nw"),title:nTitle.value.trim(),tag:nTag.value.trim(),excerpt:nExcerpt.value.trim(),active:true});A.setData(d);A.toast("Đã thêm bài viết");renderAll()});
-
-window.toggleEntity=function(type,id){const d=A.getData(),x=d[type].find(z=>z.id===id);if(x){x.active=!x.active;A.setData(d);renderAll()}};
-
-function renderSettings(data){
-  if(window.adminLogo && data.settings.logo) adminLogo.src=data.settings.logo;
-  const f=document.getElementById("settingsForm");
-  Object.entries(data.settings).forEach(([k,v])=>{if(f.elements[k])f.elements[k].value=v||""});
-}
-document.getElementById("settingsForm").onsubmit=e=>{
-  e.preventDefault();const d=A.getData();[...e.target.elements].forEach(el=>{if(el.name)d.settings[el.name]=el.value.trim()});A.setData(d);A.toast("Đã lưu cấu hình");renderAll();
-};
-document.getElementById("resetDemo").onclick=()=>{if(confirm("Reset toàn bộ dữ liệu về trạng thái ban đầu?")){A.resetData();A.toast("Đã reset dữ liệu");renderAll()}};
-window.addEventListener("storage",renderAll);window.addEventListener("adora:data",renderAll);
-renderAll();
-</script>
-</body>
-</html>
+const titleMap={dashboard:"Dashboard",appointments:"Lịch hẹn",customers:"Khách hàng",loyalty:"Loyalty",vouchers:"Voucher",services:"Dịch vụ",doctors:"Bác sĩ",settings:"Cấu hình"};
+function goSection(id){document.querySelectorAll(".admin-section").forEach(x=>x.classList.toggle("active",x.id===id));document.querySelectorAll("#adminNav button").forEach(x=>x.classList.toggle("active",x.dataset.section===id));topTitle.textContent=titleMap[id]||id}
+adminNav.onclick=e=>{const b=e.target.closest("[data-section]");if(b)goSection(b.dataset.section)};
+function modal(title,body,onSave,saveText="Lưu"){modalRoot.innerHTML=`<div class="modal-backdrop" id="mb"><div class="modal"><div class="modal-head"><h3>${title}</h3><button class="icon-btn" id="mc">✕</button></div><div class="modal-body">${body}</div>${onSave?`<div class="modal-actions"><button class="btn btn-outline" id="mx">Hủy</button><button class="btn btn-primary" id="ms">${saveText}</button></div>`:""}</div></div>`;const close=()=>modalRoot.innerHTML="";mc.onclick=close;mb.onclick=e=>{if(e.target===mb)close()};if(onSave){mx.onclick=close;ms.onclick=()=>{if(onSave(close)!==false)close()}}}
+function renderAll(){const d=A.getData();adminLogo.src=d.settings.logo;renderDashboard(d);renderAppointments(d);renderCustomers(d);renderLoyalty(d);renderVouchers(d);renderServices(d);renderDoctors(d);renderSettings(d)}
+function renderDashboard(d){const pending=d.appointments.filter(x=>x.status==="pending").length,totalPts=d.customers.reduce((s,c)=>s+Number(c.points||0),0),unused=d.customerVouchers.filter(x=>x.status==="available").length;metricGrid.innerHTML=[["Thành viên",d.customers.length,"Đã liên kết SĐT"],["Tổng điểm",totalPts.toLocaleString("vi-VN"),"Điểm đang lưu hành"],["Chờ xác nhận",pending,"Lịch hẹn"],["Voucher khả dụng",unused,"Đã đổi, chưa dùng"]].map(x=>`<div class="card metric"><div class="label">${x[0]}</div><div class="value">${x[1]}</div><div class="delta">${x[2]}</div></div>`).join("");upcomingList.innerHTML=[...d.appointments].filter(x=>!["cancelled","completed"].includes(x.status)).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,5).map(x=>{const sv=A.serviceBy(d,x.serviceId),dt=new Date(x.date+"T00:00:00");return `<div class="appointment-mini"><div class="date-chip"><span><strong>${String(dt.getDate()).padStart(2,"0")}</strong>TH${dt.getMonth()+1}</span></div><div><strong>${A.esc(x.customer)}</strong><p>${A.esc(sv.name)} · ${x.time}</p></div><span class="badge ${x.status}">${A.statusLabel(x.status)}</span></div>`}).join("")||`<div class="empty">Không có lịch sắp tới.</div>`;topMembers.innerHTML=[...d.customers].sort((a,b)=>b.points-a.points).slice(0,5).map(c=>`<div class="appointment-mini"><div class="entity-avatar">⭐</div><div><strong>${A.esc(c.name)}</strong><p>${A.tierForPoints(d,c.points).tier.name} · ${A.esc(c.memberCode)}</p></div><strong>${Number(c.points).toLocaleString("vi-VN")}</strong></div>`).join("")}
+function renderAppointments(d){const q=(appointmentSearch.value||"").toLowerCase(),st=statusFilter.value;appointmentRows.innerHTML=[...d.appointments].sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).filter(x=>(!st||x.status===st)&&(!q||[x.id,x.customer,x.phone,A.serviceBy(d,x.serviceId).name].join(" ").toLowerCase().includes(q))).map(x=>`<tr><td><strong>${A.esc(x.id)}</strong></td><td><strong>${A.esc(x.customer)}</strong><br><span class="muted">${A.esc(x.phone)}</span></td><td>${A.esc(A.serviceBy(d,x.serviceId).name||"—")}</td><td>${A.formatDate(x.date)}<br><span class="muted">${A.esc(x.time)}</span></td><td><span class="badge ${x.status}">${A.statusLabel(x.status)}</span></td><td><div class="table-actions">${x.status==="pending"?`<button class="btn btn-sm btn-primary" onclick="setStatus('${x.id}','confirmed')">Xác nhận</button>`:""}${x.status==="confirmed"?`<button class="btn btn-sm btn-outline" onclick="setStatus('${x.id}','completed')">Hoàn tất</button>`:""}</div></td></tr>`).join("")||`<tr><td colspan="6" class="empty">Không có dữ liệu.</td></tr>`}
+appointmentSearch.oninput=()=>renderAppointments(A.getData());statusFilter.onchange=()=>renderAppointments(A.getData());window.setStatus=(id,s)=>{const d=A.getData(),x=d.appointments.find(a=>a.id===id);if(x){x.status=s;A.setData(d);A.toast("Đã cập nhật trạng thái");renderAll()}}
+function renderCustomers(d){const q=(customerSearch.value||"").toLowerCase();customerRows.innerHTML=d.customers.filter(c=>!q||[c.name,c.phone,c.memberCode].join(" ").toLowerCase().includes(q)).map(c=>{const hist=d.treatmentHistory.filter(x=>x.customerId===c.id).length,v=d.customerVouchers.filter(x=>x.customerId===c.id&&x.status==="available").length,t=A.tierForPoints(d,c.points).tier.name;return `<tr><td><strong>${A.esc(c.memberCode)}</strong></td><td><strong>${A.esc(c.name)}</strong><br><span class="muted">${A.esc(c.phone)}</span></td><td><span class="badge">${t}</span></td><td><strong>${Number(c.points).toLocaleString("vi-VN")}</strong></td><td>${hist}</td><td>${v}</td><td><button class="btn btn-sm btn-outline" onclick="customerDetail('${c.id}')">Chi tiết</button></td></tr>`}).join("")}
+customerSearch.oninput=()=>renderCustomers(A.getData());
+window.customerDetail=id=>{const d=A.getData(),c=A.customerById(d,id),hist=d.treatmentHistory.filter(x=>x.customerId===id).sort((a,b)=>b.date.localeCompare(a.date)),pts=d.pointTransactions.filter(x=>x.customerId===id).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));modal("Hồ sơ thành viên",`<div class="customer-summary"><div class="summary-box"><small>Điểm</small><strong>${Number(c.points).toLocaleString("vi-VN")}</strong></div><div class="summary-box"><small>Hạng</small><strong>${A.tierForPoints(d,c.points).tier.name}</strong></div><div class="summary-box"><small>Lần khám</small><strong>${hist.length}</strong></div><div class="summary-box"><small>Mã TV</small><strong style="font-size:13px">${A.esc(c.memberCode)}</strong></div></div><h3 style="margin:0 0 8px">${A.esc(c.name)}</h3><p class="muted">${A.esc(c.phone)} · Tham gia ${A.formatDate(c.joinedAt)}</p><div class="table-actions" style="margin:12px 0 18px"><button class="btn btn-primary" onclick="modalRoot.innerHTML='';openAdjust('${c.id}')">± Điều chỉnh điểm</button><button class="btn btn-outline" onclick="modalRoot.innerHTML='';addTreatment('${c.id}')">＋ Thêm lịch sử khám</button></div><h4>Lịch sử khám</h4>${hist.map(h=>`<div class="point-row"><div><strong>${A.esc(A.serviceBy(d,h.serviceId).name||"Dịch vụ")}</strong><p>${A.formatDate(h.date)} · ${A.esc(A.doctorBy(d,h.doctorId).name||"Adora")}<br>${A.esc(h.note||"")}</p></div><span class="badge completed">Hoàn tất</span></div>`).join("")||`<p class="muted">Chưa có lịch sử.</p>`}<h4>Giao dịch điểm</h4>${pts.slice(0,6).map(p=>`<div class="point-row"><div><strong>${A.esc(p.description)}</strong><p>${A.formatDateTime(p.createdAt)}</p></div><div class="point-value ${p.points>=0?"plus":"minus"}">${p.points>=0?"+":""}${p.points}</div></div>`).join("")}`)}
+addCustomerBtn.onclick=()=>modal("Thêm thành viên",`<div class="form-grid"><div class="field"><label>Họ tên</label><input id="newCName"></div><div class="field"><label>SĐT</label><input id="newCPhone"></div></div>`,()=>{const d=A.getData(),p=A.normalizePhone(newCPhone.value);if(!newCName.value.trim()||p.length<9)return A.toast("Nhập đủ họ tên và SĐT"),false;if(A.customerByPhone(d,p))return A.toast("SĐT đã tồn tại"),false;d.customers.push({id:A.uid("cus"),memberCode:"AD"+String(Date.now()).slice(-6),name:newCName.value.trim(),phone:p,joinedAt:new Date().toISOString().slice(0,10),points:0,branch:"Chưa xác định"});A.setData(d);renderAll()});
+function renderLoyalty(d){tierList.innerHTML=[...d.tiers].sort((a,b)=>a.min-b.min).map(t=>`<div class="tier-row"><strong>${A.esc(t.name)}</strong><span>Từ ${Number(t.min).toLocaleString("vi-VN")} điểm</span></div>`).join("");pointRows.innerHTML=d.pointTransactions.slice(0,30).map(p=>{const c=A.customerById(d,p.customerId)||{};return `<tr><td>${A.esc(c.name||"—")}</td><td>${A.esc(p.description)}</td><td><strong style="color:${p.points>=0?"#159B6D":"#D64545"}">${p.points>=0?"+":""}${p.points}</strong></td><td>${A.formatDateTime(p.createdAt)}</td></tr>`}).join("")}
+adjustPointsBtn.onclick=()=>openAdjust("");
+window.openAdjust=id=>{const d=A.getData();modal("Điều chỉnh điểm",`<div class="form-grid"><div class="field span-2"><label>Thành viên</label><select id="adjCustomer">${d.customers.map(c=>`<option value="${c.id}" ${id===c.id?"selected":""}>${A.esc(c.name)} · ${A.esc(c.phone)}</option>`).join("")}</select></div><div class="field"><label>Số điểm (+/-)</label><input id="adjAmount" type="number" value="100"></div><div class="field"><label>Lý do</label><input id="adjDesc" value="Điều chỉnh điểm từ Admin"></div></div>`,()=>{const data=A.getData(),n=Number(adjAmount.value);if(!n)return A.toast("Số điểm phải khác 0"),false;A.adjustPoints(data,adjCustomer.value,n,adjDesc.value.trim(),"ADJUST");A.setData(data);A.toast("Đã điều chỉnh điểm");renderAll()})}
+window.addTreatment=id=>{const d=A.getData();modal("Thêm lịch sử khám",`<div class="form-grid"><div class="field"><label>Ngày khám</label><input id="thDate" type="date" value="${new Date().toISOString().slice(0,10)}"></div><div class="field"><label>Dịch vụ</label><select id="thService">${d.services.map(s=>`<option value="${s.id}">${A.esc(s.name)}</option>`).join("")}</select></div><div class="field"><label>Bác sĩ</label><select id="thDoctor">${d.doctors.map(x=>`<option value="${x.id}">${A.esc(x.name)}</option>`).join("")}</select></div><div class="field"><label>Ngày tái khám</label><input id="thRecall" type="date"></div><div class="field span-2"><label>Ghi chú</label><input id="thNote"></div></div>`,()=>{const data=A.getData();data.treatmentHistory.unshift({id:A.uid("th"),customerId:id,date:thDate.value,serviceId:thService.value,doctorId:thDoctor.value,status:"completed",note:thNote.value.trim(),recallDate:thRecall.value});A.setData(data);A.toast("Đã thêm lịch sử khám");renderAll()})}
+function renderVouchers(d){voucherGrid.innerHTML=d.vouchers.map(v=>`<div class="card entity-card"><div class="entity-top"><div class="entity-avatar">🎟</div><span class="badge">${v.active?"Đang mở":"Đang ẩn"}</span></div><div><h4>${A.esc(v.title)}</h4><p>${A.esc(v.description)}</p></div><div class="entity-meta"><span class="badge">${Number(v.pointsCost).toLocaleString("vi-VN")} điểm</span><span class="badge">HSD ${A.formatDate(v.expiry)}</span></div><div class="table-actions"><button class="btn btn-sm btn-outline" onclick="editVoucher('${v.id}')">Sửa</button><button class="btn btn-sm btn-outline" onclick="toggleVoucher('${v.id}')">${v.active?"Ẩn":"Hiện"}</button></div></div>`).join("")}
+function voucherForm(v={}){return `<div class="form-grid"><div class="field span-2"><label>Tên voucher</label><input id="vTitle" value="${A.esc(v.title||"")}"></div><div class="field"><label>Điểm đổi</label><input id="vCost" type="number" value="${v.pointsCost||300}"></div><div class="field"><label>Hạn sử dụng</label><input id="vExpiry" type="date" value="${v.expiry||"2026-12-31"}"></div><div class="field span-2"><label>Mô tả</label><textarea id="vDesc">${A.esc(v.description||"")}</textarea></div></div>`}
+addVoucherBtn.onclick=()=>modal("Thêm voucher",voucherForm(),()=>{const d=A.getData();if(!vTitle.value.trim())return false;d.vouchers.push({id:A.uid("vc"),title:vTitle.value.trim(),description:vDesc.value.trim(),pointsCost:Number(vCost.value),expiry:vExpiry.value,active:true});A.setData(d);renderAll()});
+window.editVoucher=id=>{const d=A.getData(),v=A.voucherBy(d,id);modal("Sửa voucher",voucherForm(v),()=>{const data=A.getData(),x=A.voucherBy(data,id);Object.assign(x,{title:vTitle.value.trim(),description:vDesc.value.trim(),pointsCost:Number(vCost.value),expiry:vExpiry.value});A.setData(data);renderAll()})};window.toggleVoucher=id=>{const d=A.getData(),v=A.voucherBy(d,id);v.active=!v.active;A.setData(d);renderAll()}
+function renderServices(d){serviceGrid.innerHTML=d.services.map(s=>`<div class="card entity-card"><div class="entity-top"><div class="entity-avatar">${s.image?`<img src="${A.esc(s.image)}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">`:A.esc(s.icon)}</div><span class="badge">${A.esc(s.category)}</span></div><div><h4>${A.esc(s.name)}</h4><p>${A.esc(s.desc)}</p></div><div class="entity-meta"><span class="badge">${A.esc(s.price)}</span></div></div>`).join("")}
+function renderDoctors(d){doctorGrid.innerHTML=d.doctors.map(x=>`<div class="card entity-card"><div class="entity-top"><div class="entity-avatar">${x.image?`<img src="${A.esc(x.image)}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">`:"👩‍⚕️"}</div></div><div><h4>${A.esc(x.name)}</h4><p>${A.esc(x.title)}<br>${A.esc(x.focus)}</p></div></div>`).join("")}
+function renderSettings(d){[...settingsForm.elements].forEach(el=>{if(el.name&&d.settings[el.name]!=null)el.value=d.settings[el.name]})}
+settingsForm.onsubmit=e=>{e.preventDefault();const d=A.getData();[...e.target.elements].forEach(el=>{if(el.name)d.settings[el.name]=el.value.trim()});A.setData(d);A.toast("Đã lưu cấu hình");renderAll()}
+resetDemo.onclick=()=>{if(confirm("Reset toàn bộ dữ liệu V3?")){A.resetData();A.toast("Đã reset demo");renderAll()}}
+window.addEventListener("storage",renderAll);window.addEventListener("adora:data",renderAll);renderAll();
+</script></body></html>
